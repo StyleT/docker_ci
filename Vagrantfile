@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "10.10.10.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -61,6 +61,7 @@ Vagrant.configure(2) do |config|
     d.pull_images "gliderlabs/registrator"
     d.pull_images "ubuntu"
     d.pull_images "swarm"
+    d.pull_images "jenkinsci/jenkins"
   end
 
   # Enable provisioning with a shell script. Additional provisioners such as
