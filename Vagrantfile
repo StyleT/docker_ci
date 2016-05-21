@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+unless Vagrant.has_plugin?("vagrant-docker-compose")
+  system("vagrant plugin install vagrant-docker-compose")
+  puts "Dependencies installed, please try the command again."
+  exit
+end
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -45,24 +51,17 @@ Vagrant.configure(2) do |config|
      # Customize the amount of memory on the VM:
     vb.memory = "2048"
   end
-  #
+  
   # View the documentation for the provider you are using for more
   # information on available options.
 
-  config.vm.provision "docker" do |d|
-    d.pull_images "ariya/centos6-teamcity-server"
-    d.pull_images "ariya/centos6-teamcity-agent"
-    d.pull_images "genezys/gitlab"
-    d.pull_images "rancher/server"
-    d.pull_images "rancher/agent"
-    d.pull_images "rancher/agent-instance:v0.8.1"
-    d.pull_images "registry:2"
-    d.pull_images "gliderlabs/consul-server"
-    d.pull_images "gliderlabs/registrator"
-    d.pull_images "ubuntu"
-    d.pull_images "swarm"
-    d.pull_images "jenkinsci/jenkins"
-  end
+  # config.vm.provision "docker" do |d|
+  #   d.pull_images "busybox"
+  # end
+  #config.vm.provision :docker_compose, yml: ["/vagrant/docker-compose-base.yml","/vagrant/docker-compose.yml"], rebuild: true, project_name: "myproject", run: "always"
+
+  config.vm.provision :docker
+  config.vm.provision :docker_compose
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
