@@ -7,8 +7,9 @@
 ## Docker
 Repo: https://hub.docker.com/r/stylet/ng-todo-app/
 ```
-docker build -t stylet/ng-todo-app:1.0 .
+docker build -t stylet/ng-todo-app -t stylet/ng-todo-app:1.0 .
 docker run -d -P stylet/ng-todo-app
+docker push stylet/ng-todo-app
 ```
 
 ## Learning AngularJS
